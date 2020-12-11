@@ -151,8 +151,8 @@ def blrPredict(W, data):
     ypred = np.zeros((data.shape[0],W.shape[1]))
     label = np.zeros((data.shape[0], 1))
 
-    data_bias = np.hstack((np.ones((data.shape[0],1)),data))
-    classprob=sigmoid(np.dot(data_bias,W))
+    data_bias= np.hstack((np.ones((data.shape[0],1)),data))
+    classprob= sigmoid(np.dot(data_bias,W))
     label=np.argmax(classprob,axis=1).reshape(-1,1)
 
     return label
@@ -219,8 +219,11 @@ def mlrPredict(W, data):
     label = np.zeros((data.shape[0], 1))
     
     data_bias = np.hstack((np.ones((data.shape[0],1)),data))
-    classprob=sigmoid(np.dot(data_bias,W))
-    rsamp=np.random.randint(10000,size=100)
+    
+    smax=np.exp(np.dot(data_bias,W))
+    norms=np.sum(smax,axis=1).reshape(-1,1)
+    classprob=smax/norms
+    
     label=np.argmax(classprob,axis=1).reshape(-1,1)
 
     return label
