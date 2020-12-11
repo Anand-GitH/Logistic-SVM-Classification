@@ -186,7 +186,7 @@ def mlrObjFunction(params, *args):
     y=labeli
     
     #Calculating probability of the class for each data point and normalizing
-    smax=sigmoid(np.dot(train_data,initialWeights_b))
+    smax=np.exp(np.dot(train_data,initialWeights_b))
     norms=np.sum(smax,axis=1).reshape(-1,1)
     probc=smax/norms
     
